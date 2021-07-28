@@ -6,7 +6,7 @@ import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerCircle;
 import twitter4j.Status;
-import ui.MapMarkerSimple;
+import ui.MapMarkerRich;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +15,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.List;
 
+import static util.Util.imageFromURL;
 import static util.Util.statusCoordinate;
 
 /**
@@ -84,7 +85,11 @@ public class Query implements Observer {
         Status newStatus  = (Status) arg;
         if (filter.matches(newStatus)) {
             Coordinate coordinate = statusCoordinate(newStatus);
-            MapMarkerSimple newMarker = new MapMarkerSimple(getLayer(), coordinate);
+            String imageURL = newStatus.getUser().getProfileImageURL();
+            Image image = imageFromURL(imageURL);
+            String text = newStatus.getText();
+
+            MapMarkerRich newMarker = new MapMarkerRich(layer, color, coordinate, text, image);
             allQueryMarkers.add(newMarker);
             map.addMapMarker(newMarker);
         }
