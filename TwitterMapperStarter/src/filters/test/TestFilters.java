@@ -21,6 +21,24 @@ public class TestFilters {
     }
 
     @Test
+    public void testOr() {
+        Filter f = new OrFilter(new BasicFilter("Ronaldo"), new BasicFilter("Gjini"));
+        assertTrue(f.matches(makeStatus("Ronaldo Gjini")));
+        assertTrue(f.matches(makeStatus("Ronaldo UNYT")));
+        assertFalse(f.matches(makeStatus("John travolta")));
+        assertFalse(f.matches(makeStatus("Roni Gjin")));
+    }
+
+    @Test
+    public void testAnd() {
+        Filter f = new AndFilter(new BasicFilter("Ronaldo"), new BasicFilter("Gjini"));
+        assertTrue(f.matches(makeStatus("Ronaldo Gjini")));
+        assertTrue(f.matches(makeStatus("ronaldo gjini")));
+        assertFalse(f.matches(makeStatus("Ronaldo John")));
+        assertFalse(f.matches(makeStatus("Ronaldo Ina")));
+    }
+    
+    @Test
     public void testNot() {
         Filter f = new NotFilter(new BasicFilter("fred"));
         assertFalse(f.matches(makeStatus("Fred Flintstone")));
