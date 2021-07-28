@@ -55,7 +55,7 @@ public class Application extends JFrame {
         Set<String> allterms = getQueryTerms();
         twitterSource.setFilterTerms(allterms);
         contentPanel.addQuery(query);
-        // TODO: This is the place where you should connect the new query to the twitter source
+        twitterSource.addObserver(query);
     }
 
     /**
@@ -188,9 +188,10 @@ public class Application extends JFrame {
 
     // A query has been deleted, remove all traces of it
     public void terminateQuery(Query query) {
-        // TODO: This is the place where you should disconnect the expiring query from the twitter source
         queries.remove(query);
+        query.terminate();
         Set<String> allterms = getQueryTerms();
         twitterSource.setFilterTerms(allterms);
+        twitterSource.deleteObserver(query);
     }
 }
