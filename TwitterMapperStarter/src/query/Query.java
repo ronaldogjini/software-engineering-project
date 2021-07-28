@@ -10,6 +10,7 @@ import ui.MapMarkerSimple;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.List;
@@ -64,6 +65,7 @@ public class Query implements Observer {
         this.color = color;
         this.layer = new Layer(queryString);
         this.map = map;
+        allQueryMarkers = new ArrayList<>();
     }
 
     @Override
@@ -82,7 +84,9 @@ public class Query implements Observer {
         Status newStatus  = (Status) arg;
         if (filter.matches(newStatus)) {
             Coordinate coordinate = statusCoordinate(newStatus);
-            map.addMapMarker(new MapMarkerSimple(getLayer(), coordinate));
+            MapMarkerSimple newMarker = new MapMarkerSimple(getLayer(), coordinate);
+            allQueryMarkers.add(newMarker);
+            map.addMapMarker(newMarker);
         }
     }
 }
