@@ -20,7 +20,7 @@ import static util.Util.statusCoordinate;
  * A query over the twitter stream.
  * TODO: Task 4: you are to complete this class.
  */
-public class Query extends Observer {
+public class Query implements Observer {
     // The map on which to display markers when the query matches
     private final JMapViewer map;
     // Each query has its own "layer" so they can be turned on and off all at once
@@ -82,7 +82,7 @@ public class Query extends Observer {
         Status newStatus  = (Status) arg;
         if (filter.matches(newStatus)) {
             Coordinate coordinate = statusCoordinate(newStatus);
-            map.addMapMarker(new MapMarkerSimple(getLayer(), coordinate);
+            map.addMapMarker(new MapMarkerSimple(getLayer(), coordinate));
         }
     }
 }
