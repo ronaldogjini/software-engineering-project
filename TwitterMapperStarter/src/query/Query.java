@@ -89,7 +89,7 @@ public class Query implements Observer {
             Image image = imageFromURL(imageURL);
             String text = newStatus.getText();
 
-            MapMarkerRich newMarker = new MapMarkerRich(layer, color, coordinate, text, image);
+            MapMarkerRich newMarker = new MapMarkerRich(layer, color, coordinate, text, image, imageURL);
             allQueryMarkers.add(newMarker);
             map.addMapMarker(newMarker);
         }

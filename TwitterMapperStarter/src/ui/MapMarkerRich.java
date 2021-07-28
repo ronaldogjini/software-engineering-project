@@ -3,7 +3,6 @@ package ui;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.Layer;
 import org.openstreetmap.gui.jmapviewer.MapMarkerCircle;
-import org.openstreetmap.gui.jmapviewer.Style;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -14,16 +13,18 @@ public class MapMarkerRich extends MapMarkerCircle {
     private static final int markerSize = 50;
     private final Coordinate coordinate;
     private final Image image;
+    private final String imageLink;
     private final String content;
     private final int markerBorderSize = 5;
     private Color color;
 
 
-    public MapMarkerRich(Layer layer, Color color, Coordinate coordinate,  String content, Image image) {
+    public MapMarkerRich(Layer layer, Color color, Coordinate coordinate,  String content, Image image, String imageLink) {
         super(layer, null, coordinate, markerSize, STYLE.FIXED, getDefaultStyle());
         this.coordinate = coordinate;
         this.color = color;
         this.image = image;
+        this.imageLink = imageLink;
         this. content = content;
     }
 
@@ -48,4 +49,11 @@ public class MapMarkerRich extends MapMarkerCircle {
 
     }
 
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public String getContent() {
+        return content;
+    }
 }
