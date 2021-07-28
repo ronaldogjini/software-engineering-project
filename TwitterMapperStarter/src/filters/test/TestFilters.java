@@ -37,7 +37,7 @@ public class TestFilters {
         assertFalse(f.matches(makeStatus("Ronaldo John")));
         assertFalse(f.matches(makeStatus("Ronaldo Ina")));
     }
-    
+
     @Test
     public void testNot() {
         Filter f = new NotFilter(new BasicFilter("fred"));
