@@ -77,61 +77,13 @@ public class Application extends JFrame {
         setSize(300, 300);
         initialize();
 
-        bing = new BingAerialTileSource();
-
         // Do UI initialization
         contentPanel = new ContentPanel(this);
-        setLayout(new BorderLayout());
-        add(contentPanel, BorderLayout.CENTER);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // Always have map markers showing.
-        map().setMapMarkerVisible(true);
-        // Always have zoom controls showing,
-        // and allow scrolling of the map around the edge of the world.
-        map().setZoomContolsVisible(true);
-        map().setScrollWrapEnabled(true);
-
-        // Use the Bing tile provider
-        map().setTileSource(bing);
-
-        //NOTE This is so that the map eventually loads the tiles once Bing attribution is ready.
-        Coordinate coord = new Coordinate(0, 0);
-
-        Timer bingTimer = new Timer();
-        TimerTask bingAttributionCheck = new TimerTask() {
-            @Override
-            public void run() {
-                // This is the best method we've found to determine when the Bing data has been loaded.
-                // We use this to trigger zooming the map so that the entire world is visible.
-                if (!bing.getAttributionText(0, coord, coord).equals("Error loading Bing attribution data")) {
-                    map().setZoom(2);
-                    bingTimer.cancel();
-                }
-            }
-        };
-        bingTimer.schedule(bingAttributionCheck, 100, 200);
-
-        // Set up a motion listener to create a tooltip showing the tweets at the pointer position
-        map().addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point p = e.getPoint();
-                ICoordinate pos = map().getPosition(p);
-
-                List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
-                if (!markers.isEmpty()) {
-                    String tooltipContent = "<html>";
-                    for (MapMarker marker : markers) {
-                        MapMarkerRich markerPretty = (MapMarkerRich) marker;
-                        tooltipContent += "<p><img src=" + markerPretty.getImageLink() + ">";
-                        tooltipContent += markerPretty.getContent() + "</p></html>";
-                    }
-                    map().setToolTipText(tooltipContent);
-                }
-            }
-        });
+        initializeApplicationUI();
+        configureInitialMapSettings();
+        checkBingMapsLoaded();
+        createMouseMotionListener();
     }
 
     // How big is a single pixel on the map?  We use this to compute which tweet markers
@@ -200,5 +152,68 @@ public class Application extends JFrame {
         Set<String> allterms = getQueryTerms();
         twitterSource.setFilterTerms(allterms);
         twitterSource.deleteObserver(query);
+    }
+
+    private void initializeApplicationUI() {
+        bing = new BingAerialTileSource();
+        setLayout(new BorderLayout());
+        add(contentPanel, BorderLayout.CENTER);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+    }
+
+    private void configureInitialMapSettings() {
+        // Always have map markers showing.
+        map().setMapMarkerVisible(true);
+        // Always have zoom controls showing,
+        // and allow scrolling of the map around the edge of the world.
+        map().setZoomContolsVisible(true);
+        map().setScrollWrapEnabled(true);
+
+        // Use the Bing tile provider
+        map().setTileSource(bing);
+    }
+
+    private void checkBingMapsLoaded() {
+        //NOTE This is so that the map eventually loads the tiles once Bing attribution is ready.
+        Coordinate coord = new Coordinate(0, 0);
+        Timer bingTimer = new Timer();
+        TimerTask bingAttributionCheck = new TimerTask() {
+            @Override
+            public void run() {
+                // This is the best method we've found to determine when the Bing data has been loaded.
+                // We use this to trigger zooming the map so that the entire world is visible.
+                if (!bing.getAttributionText(0, coord, coord).equals("Error loading Bing attribution data")) {
+                    map().setZoom(2);
+                    bingTimer.cancel();
+                }
+            }
+        };
+        bingTimer.schedule(bingAttributionCheck, 100, 200);
+    }
+
+    private void createMouseMotionListener() {
+        map().addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                Point p = e.getPoint();
+                ICoordinate pos = map().getPosition(p);
+
+                List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
+                if (!markers.isEmpty()) {
+                    displayTooltipInfo(markers);
+                }
+            }
+        });
+    }
+
+    public void displayTooltipInfo(List<MapMarker> markers) {
+        String tooltipContent = "<html>";
+        for (MapMarker marker : markers) {
+            MapMarkerRich markerPretty = (MapMarkerRich) marker;
+            tooltipContent += "<p><img src=" + markerPretty.getImageLink() + ">";
+            tooltipContent += markerPretty.getContent() + "</p></html>";
+        }
+        map().setToolTipText(tooltipContent);
     }
 }
