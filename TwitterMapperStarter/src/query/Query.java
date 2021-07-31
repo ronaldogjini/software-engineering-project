@@ -84,15 +84,20 @@ public class Query implements Observer {
     public void update(Observable o, Object arg) {
         Status newStatus  = (Status) arg;
         if (filter.matches(newStatus)) {
-            Coordinate coordinate = statusCoordinate(newStatus);
-            String imageURL = newStatus.getUser().getProfileImageURL();
-            Image image = imageFromURL(imageURL);
-            String text = newStatus.getText();
-
-            MapMarkerRich newMarker = new MapMarkerRich(layer, color, coordinate, text, image, imageURL);
+            MapMarkerRich newMarker = createMarkerRich(newStatus);
             allQueryMarkers.add(newMarker);
             map.addMapMarker(newMarker);
         }
+    }
+
+    private MapMarkerRich createMarkerRich(Status status) {
+        Coordinate coordinate = statusCoordinate(status);
+        String imageURL = status.getUser().getProfileImageURL();
+        Image image = imageFromURL(imageURL);
+        String text = status.getText();
+
+        return new MapMarkerRich(layer, color, coordinate, text, image, imageURL);
+
     }
 }
 
