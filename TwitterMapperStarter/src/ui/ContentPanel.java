@@ -41,8 +41,8 @@ public class ContentPanel extends JPanel {
         JPanel colorPanel = newColorPanel(query);
         JButton removeButton = addRemoveButton(query, newQueryPanel);
 
-        GridBagConstraints c = new GridBagConstraints();
-        newQueryPanel.add(colorPanel, c);
+        GridBagConstraints constraints = new GridBagConstraints();
+        newQueryPanel.add(colorPanel, constraints);
 
         JCheckBox checkbox = addCheckbox(query);
         query.setCheckBox(checkbox);
@@ -131,10 +131,10 @@ public class ContentPanel extends JPanel {
     }
 
     private void fillQueryPanel(JPanel newQueryPanel, JCheckBox checkbox, JButton removeButton) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 1.0;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        newQueryPanel.add(checkbox, c);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.weightx = 1.0;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        newQueryPanel.add(checkbox, constraints);
         newQueryPanel.add(removeButton);
 
     }

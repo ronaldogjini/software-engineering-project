@@ -27,26 +27,18 @@ public class NewQueryPanel extends JPanel {
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
 
         queryLabel.setLabelFor(newQuery);
-        GridBagConstraints constraints = new GridBagConstraints();
 
-
-        addNewQueryComponent(constraints);
+        addNewQueryComponent();
         add(Box.createRigidArea(new Dimension(5, 5)));
 
-        JLabel colorLabel = new JLabel("Select Color: ");
         colorSetter.setBackground(getRandomColor());
 
-        addColorSetterComponent(constraints, colorLabel);
+        addColorSetterComponent();
         add(Box.createRigidArea(new Dimension(5, 5)));
 
-        JButton addQueryButton = new JButton("Add New Search");
-        addQueryButtonComponent(constraints, addQueryButton);
+        JButton addQueryButton = addQueryButtonComponent();
 
-        setBorder(
-                BorderFactory.createCompoundBorder(
-                        BorderFactory.createTitledBorder("New Search"),
-                        BorderFactory.createEmptyBorder(5,5,5,5)));
-
+        addSearchBorder();
         createListenerAddQueryButton(addQueryButton);
         // This makes the "Enter" key submit the query.
         app.getRootPane().setDefaultButton(addQueryButton);
@@ -98,7 +90,9 @@ public class NewQueryPanel extends JPanel {
         });
     }
 
-    private void addColorSetterComponent(GridBagConstraints constraints, JLabel colorLabel) {
+    private JLabel addColorSetterComponent() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        JLabel colorLabel = new JLabel("Select Color: ");
         constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridy = 1;
@@ -109,9 +103,11 @@ public class NewQueryPanel extends JPanel {
         constraints.gridx = 1;
         colorSetter.setMaximumSize(new Dimension(200, 20));
         add(colorSetter, constraints);
+        return colorLabel;
     }
 
-    private void addNewQueryComponent(GridBagConstraints constraints) {
+    private void addNewQueryComponent() {
+        GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridwidth = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.NONE;
         constraints.gridy = 0;
@@ -124,10 +120,21 @@ public class NewQueryPanel extends JPanel {
         add(newQuery, constraints);
     }
 
-    private void addQueryButtonComponent(GridBagConstraints constraints, JButton addQueryButton) {
+    private JButton addQueryButtonComponent() {
+        GridBagConstraints constraints = new GridBagConstraints();
+        JButton addQueryButton = new JButton("Add New Search");
         constraints.gridx = GridBagConstraints.RELATIVE;       //aligned with button 2
         constraints.gridwidth = 2;   //2 columns wide
         constraints.gridy = GridBagConstraints.RELATIVE;       //third row
         add(addQueryButton, constraints);
+
+        return addQueryButton;
+    }
+
+    private void addSearchBorder() {
+        setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createTitledBorder("New Search"),
+                        BorderFactory.createEmptyBorder(5,5,5,5)));
     }
 }
