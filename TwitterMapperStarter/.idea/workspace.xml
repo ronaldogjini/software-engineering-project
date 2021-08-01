@@ -20,11 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="59c0a953-a6cc-4dad-baed-ba3ad9071538" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/ui/ContentPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/ui/ContentPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/ContentPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/ContentPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uml/filters.uml" beforeDir="false" afterPath="$PROJECT_DIR$/uml/filters.uml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +93,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Projects/nlp-language-finder-frontend/src/images/final/software-engineering-project-master/TwitterMapperStarter" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -162,17 +158,6 @@
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -335,6 +320,7 @@
       <workItem from="1503603343961" duration="29000" />
       <workItem from="1503603452332" duration="49902000" />
       <workItem from="1627852014691" duration="100000" />
+      <workItem from="1627854551740" duration="43000" />
     </task>
     <servers />
   </component>
@@ -392,15 +378,13 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1627852111638">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1627854593080">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1627852111638" />
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1627854593080" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
