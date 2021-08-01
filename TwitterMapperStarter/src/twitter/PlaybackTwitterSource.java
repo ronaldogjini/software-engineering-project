@@ -2,6 +2,7 @@ package twitter;
 
 import twitter4j.Status;
 import util.ObjectSource;
+import util.Logger;
 
 /**
  * A Twitter source that plays back a recorded stream of tweets.
@@ -72,8 +73,7 @@ public class PlaybackTwitterSource extends TwitterSource {
      * The playback source merely starts the playback thread, it it hasn't been started already
      */
     protected void sync() {
-        System.out.println("Starting playback thread with " + terms);
-
+        Logger.printPlaybackSyncing(terms);
         startThread();
     }
 }

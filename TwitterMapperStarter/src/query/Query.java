@@ -18,10 +18,6 @@ import java.util.List;
 import static util.ImageRetriever.imageFromURL;
 import static util.LocationCoordinates.statusCoordinate;
 
-/**
- * A query over the twitter stream.
- * TODO: Task 4: you are to complete this class.
- */
 public class Query implements Observer {
     // The map on which to display markers when the query matches
     private final JMapViewer map;

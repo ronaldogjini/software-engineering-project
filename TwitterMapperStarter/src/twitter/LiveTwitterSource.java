@@ -2,6 +2,7 @@ package twitter;
 
 import twitter4j.*;
 import twitter4j.conf.ConfigurationBuilder;
+import util.Logger;
 
 /**
  * Encapsulates the connection to Twitter
@@ -24,7 +25,7 @@ public class LiveTwitterSource extends TwitterSource {
         String[] queriesArray = terms.toArray(new String[0]);
         filter.track(queriesArray);
 
-        System.out.println("Syncing live Twitter stream with " + terms);
+        Logger.printLiveSyncing(terms);
 
         twitterStream.filter(filter);
     }
