@@ -62,11 +62,11 @@ public class Application extends JFrame {
      * @return
      */
     private Set<String> getQueryTerms() {
-        Set<String> ans = new HashSet<>();
+        Set<String> termsList = new HashSet<>();
         for (Query q : queries) {
-            ans.addAll(q.getFilter().terms());
+            termsList.addAll(q.getFilter().terms());
         }
-        return ans;
+        return termsList;
     }
 
     /**
@@ -77,6 +77,7 @@ public class Application extends JFrame {
         setSize(300, 300);
         initialize();
 
+
         // Do UI initialization
         contentPanel = new ContentPanel(this);
 
@@ -84,6 +85,7 @@ public class Application extends JFrame {
         configureInitialMapSettings();
         checkBingMapsLoaded();
         createMouseMotionListener();
+
     }
 
     // How big is a single pixel on the map?  We use this to compute which tweet markers
@@ -96,27 +98,27 @@ public class Application extends JFrame {
 
     // Get those layers (of tweet markers) that are visible because their corresponding query is enabled
     private Set<Layer> getVisibleLayers() {
-        Set<Layer> ans = new HashSet<>();
+        Set<Layer> layersList = new HashSet<>();
         for (Query q : queries) {
             if (q.getVisible()) {
-                ans.add(q.getLayer());
+                layersList.add(q.getLayer());
             }
         }
-        return ans;
+        return layersList;
     }
 
     // Get all the markers at the given map position, at the current map zoom setting
     private List<MapMarker> getMarkersCovering(ICoordinate pos, double pixelWidth) {
-        List<MapMarker> ans = new ArrayList<>();
+        List<MapMarker> markersList = new ArrayList<>();
         Set<Layer> visibleLayers = getVisibleLayers();
         for (MapMarker m : map().getMapMarkerList()) {
             if (!visibleLayers.contains(m.getLayer())) continue;
             double distance = SphericalGeometry.distanceBetween(m.getCoordinate(), pos);
             if (distance < m.getRadius() * pixelWidth) {
-                ans.add(m);
+                markersList.add(m);
             }
         }
-        return ans;
+        return markersList;
     }
 
     public JMapViewer map() {
