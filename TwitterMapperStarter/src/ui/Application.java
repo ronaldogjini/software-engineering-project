@@ -201,6 +201,7 @@ public class Application extends JFrame {
                 Point p = e.getPoint();
                 ICoordinate pos = map().getPosition(p);
 
+                map().setToolTipText("");
                 List<MapMarker> markers = getMarkersCovering(pos, pixelWidth(p));
                 if (!markers.isEmpty()) {
                     displayTooltipInfo(markers);
@@ -212,10 +213,11 @@ public class Application extends JFrame {
     public void displayTooltipInfo(List<MapMarker> markers) {
         String tooltipContent = "<html>";
         for (MapMarker marker : markers) {
-            MapMarkerRich markerPretty = (MapMarkerRich) marker;
-            tooltipContent += "<p><img src=" + markerPretty.getImageLink() + ">";
-            tooltipContent += markerPretty.getContent() + "</p></html>";
+            MapMarkerRich markerRich = (MapMarkerRich) marker;
+            tooltipContent += "<p><img src=" + markerRich.getImageLink() + ">";
+            tooltipContent += markerRich.getContent() + "</p>";
         }
+        tooltipContent+="</html>";
         map().setToolTipText(tooltipContent);
     }
 }
