@@ -121,7 +121,6 @@ public class ContentPanel extends JPanel {
         JPanel colorPanel = new JPanel();
         colorPanel.setBackground(query.getColor());
         colorPanel.setPreferredSize(new Dimension(30, 30));
-
         return colorPanel;
     }
 
@@ -137,7 +136,6 @@ public class ContentPanel extends JPanel {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         newQueryPanel.add(checkbox, constraints);
         newQueryPanel.add(removeButton);
-
     }
 
 }
