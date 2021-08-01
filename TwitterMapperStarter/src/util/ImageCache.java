@@ -31,7 +31,7 @@ public class ImageCache {
     public BufferedImage getImage(String url) {
         BufferedImage ans = cache.get(url);
         if (ans == null) {
-            ans = Util.imageFromURL(url);
+            ans = ImageRetriever.imageFromURL(url);
             cache.put(url, ans);
         }
         return ans;
@@ -44,7 +44,7 @@ public class ImageCache {
             Thread t = new Thread() {
                 @Override
                 public void run() {
-                    BufferedImage ans = Util.imageFromURL(url);
+                    BufferedImage ans = ImageRetriever.imageFromURL(url);
                     SwingUtilities.invokeLater(new Runnable() {
                         @Override
                         public void run() {

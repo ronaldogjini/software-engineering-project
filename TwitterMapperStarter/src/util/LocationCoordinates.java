@@ -12,7 +12,7 @@ import java.net.URL;
 /**
  * Helpful methods that don't clearly fit anywhere else.
  */
-public class Util {
+public class LocationCoordinates {
     public static GeoLocation statusLocation(Status status) {
         GeoLocation bottomRight = status.getPlace().getBoundingBoxCoordinates()[0][0];
         GeoLocation topLeft = status.getPlace().getBoundingBoxCoordinates()[0][2];
@@ -33,14 +33,5 @@ public class Util {
         return new Coordinate(newLat, newLon);
     }
 
-    public static BufferedImage defaultImage = imageFromURL("http://png-2.findicons.com/files/icons/1995/web_application/48/smiley.png");
-    public static BufferedImage imageFromURL(String url) {
-        try {
-            BufferedImage img = ImageIO.read(new URL(url));
-            if (img == null) return defaultImage;
-            return img;
-        } catch (IOException e) {
-            return defaultImage;
-        }
-    }
+
 }

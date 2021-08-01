@@ -15,8 +15,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.List;
 
-import static util.Util.imageFromURL;
-import static util.Util.statusCoordinate;
+import static util.ImageRetriever.imageFromURL;
+import static util.LocationCoordinates.statusCoordinate;
 
 /**
  * A query over the twitter stream.
