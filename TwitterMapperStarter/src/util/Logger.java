@@ -1,6 +1,5 @@
 package util;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import twitter4j.Status;
 
 import java.util.Set;

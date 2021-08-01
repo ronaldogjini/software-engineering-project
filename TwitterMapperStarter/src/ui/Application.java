@@ -7,7 +7,6 @@ import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
 import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import query.Query;
-import twitter.LiveTwitterSource;
 import twitter.TwitterSource;
 import twitter.TwitterSourceFactory;
 import util.SphericalGeometry;
@@ -35,11 +34,6 @@ public class Application extends JFrame {
     private TwitterSource twitterSource;
 
     private void initialize() {
-        // To use the recorded twitter stream, use the following line
-        // The number passed to the constructor is a speedup value:
-        //  1.0 - play back at the recorded speed
-        //  2.0 - play back twice as fast
-
         TwitterSourceFactory sourceFactory = new TwitterSourceFactory();
         twitterSource = sourceFactory.createTwitterSource("LIVE");
 
@@ -52,8 +46,8 @@ public class Application extends JFrame {
      */
     public void addQuery(Query query) {
         queries.add(query);
-        Set<String> allterms = getQueryTerms();
-        twitterSource.setFilterTerms(allterms);
+        Set<String> allTerms = getQueryTerms();
+        twitterSource.setFilterTerms(allTerms);
         contentPanel.addQuery(query);
         twitterSource.addObserver(query);
     }
@@ -65,8 +59,8 @@ public class Application extends JFrame {
      */
     private Set<String> getQueryTerms() {
         Set<String> termsList = new HashSet<>();
-        for (Query q : queries) {
-            termsList.addAll(q.getFilter().terms());
+        for (Query query : queries) {
+            termsList.addAll(query.getFilter().terms());
         }
         return termsList;
     }
@@ -99,9 +93,9 @@ public class Application extends JFrame {
     // Get those layers (of tweet markers) that are visible because their corresponding query is enabled
     private Set<Layer> getVisibleLayers() {
         Set<Layer> layersList = new HashSet<>();
-        for (Query q : queries) {
-            if (q.getVisible()) {
-                layersList.add(q.getLayer());
+        for (Query query : queries) {
+            if (query.getVisible()) {
+                layersList.add(query.getLayer());
             }
         }
         return layersList;
@@ -137,10 +131,10 @@ public class Application extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 System.out.println("Recomputing visible queries");
-                for (Query q : queries) {
-                    JCheckBox box = q.getCheckBox();
+                for (Query query : queries) {
+                    JCheckBox box = query.getCheckBox();
                     Boolean state = box.isSelected();
-                    q.setVisible(state);
+                    query.setVisible(state);
                 }
                 map().repaint();
             }
@@ -151,8 +145,8 @@ public class Application extends JFrame {
     public void terminateQuery(Query query) {
         queries.remove(query);
         query.terminate();
-        Set<String> allterms = getQueryTerms();
-        twitterSource.setFilterTerms(allterms);
+        Set<String> allTerms = getQueryTerms();
+        twitterSource.setFilterTerms(allTerms);
         twitterSource.deleteObserver(query);
     }
 
@@ -171,7 +165,6 @@ public class Application extends JFrame {
         // and allow scrolling of the map around the edge of the world.
         map().setZoomContolsVisible(true);
         map().setScrollWrapEnabled(true);
-
         // Use the Bing tile provider
         map().setTileSource(bing);
     }
