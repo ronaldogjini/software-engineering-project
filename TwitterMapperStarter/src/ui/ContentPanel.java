@@ -91,6 +91,7 @@ public class ContentPanel extends JPanel {
     private JButton addRemoveButton(Query query, JPanel newQueryPanel) {
         JButton removeButton = new JButton("X");
         removeButton.setPreferredSize(new Dimension(30, 20));
+        removeButton.setMargin(new Insets(0,0,0,0));
         removeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
