@@ -42,11 +42,11 @@ public class Parser {
     }
 
     public Filter parse() throws SyntaxError {
-        Filter ans = expr();
+        Filter filter = expr();
         if (scanner.peek() != null) {
             throw new SyntaxError("Extra stuff at end of input");
         }
-        return ans;
+        return filter;
     }
 
     private Filter expr() throws SyntaxError {

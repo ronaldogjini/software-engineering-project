@@ -18,9 +18,9 @@ public class Scanner {
         // This simple scanner scans the entire input in its constructor, building a list of tokens
         // which it then returns as necessary in response to calls to its peek and advance methods.
         tokens = new LinkedList<>();
-        Matcher m = tokenPattern.matcher(input);
-        while (m.find()) {
-            String token = m.group();
+        Matcher matcher = tokenPattern.matcher(input);
+        while (matcher.find()) {
+            String token = matcher.group();
             // Throw away any white space
             if (token.matches("\\s+"))  continue;
             tokens.add(token);

@@ -79,7 +79,6 @@ public class Application extends JFrame {
         setSize(300, 300);
         initialize();
 
-
         // Do UI initialization
         contentPanel = new ContentPanel(this);
 
@@ -87,7 +86,6 @@ public class Application extends JFrame {
         configureInitialMapSettings();
         checkBingMapsLoaded();
         createMouseMotionListener();
-
     }
 
     // How big is a single pixel on the map?  We use this to compute which tweet markers
