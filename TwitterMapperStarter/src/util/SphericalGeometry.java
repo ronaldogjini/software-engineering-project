@@ -18,12 +18,16 @@ public class SphericalGeometry {
     public static double distanceBetween(ICoordinate p1, ICoordinate p2) {
         double lat1 = p1.getLat() / 180.0 * Math.PI;
         double lat2 = p2.getLat() / 180.0 * Math.PI;
+
         double deltaLon = (p2.getLon() - p1.getLon()) / 180.0 * Math.PI;
         double deltaLat = (p2.getLat() - p1.getLat()) / 180.0 * Math.PI;
 
-        double a = Math.sin(deltaLat / 2.0) * Math.sin(deltaLat / 2.0)
+        double sinLatSquared = Math.sin(deltaLat / 2.0) * Math.sin(deltaLat / 2.0);
+        double sinLonSquared = Math.sin(deltaLon / 2.0) * Math.sin(deltaLon / 2.0);
+
+        double a = sinLatSquared
                 + Math.cos(lat1) * Math.cos(lat2)
-                * Math.sin(deltaLon / 2.0) * Math.sin(deltaLon / 2.0);
+                * sinLonSquared;
         double c = 2.0 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return c * RADIUS;
