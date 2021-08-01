@@ -9,6 +9,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.BingAerialTileSource;
 import query.Query;
 import twitter.LiveTwitterSource;
 import twitter.TwitterSource;
+import twitter.TwitterSourceFactory;
 import util.SphericalGeometry;
 
 import javax.swing.*;
@@ -39,7 +40,8 @@ public class Application extends JFrame {
         //  1.0 - play back at the recorded speed
         //  2.0 - play back twice as fast
 
-        twitterSource = new LiveTwitterSource();
+        TwitterSourceFactory sourceFactory = new TwitterSourceFactory();
+        twitterSource = sourceFactory.createTwitterSource("LIVE");
 
         queries = new ArrayList<>();
     }
